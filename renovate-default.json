@@ -1,0 +1,222 @@
+// 20241230133641
+// https://raw.githubusercontent.com/longhorn/release/refs/heads/main/renovate-default.json
+
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "security:openssf-scorecard"
+  ],
+  "baseBranches": [
+    "master",
+    "main",
+    "v1.8.x",
+    "v1.7.x",
+    "v1.6.x"
+  ],
+  "automergeMajor": false,
+  "dockerfile": {
+    "fileMatch": [
+      "Dockerfile.dapper"
+    ]
+  },
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "prHourlyLimit": 12,
+  "timezone": "Asia/Taipei",
+  "schedule": [
+    "after 10am on saturday",
+    "on sunday"
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "vulnerabilityAlerts": {
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchManagers": [
+        "gomod",
+        "dockerfile"
+      ]
+    },
+    {
+      "matchBaseBranches": [
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "excludePackagePrefixes": [
+        "github.com/longhorn"
+      ],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchManagers": [
+        "github-actions",
+        "droneci"
+      ],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "master",
+        "main",
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "rancher/dapper"
+      ],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchPackageNames": [
+        "github.com/rancher/lasso"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchUpdateTypes": [
+        "digest"
+      ],
+      "matchPackageNames": [
+        "github.com/longhorn/longhorn-spdk-engine",
+        "github.com/longhorn/go-spdk-helper"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "enabled": false
+    },
+    {
+      "matchBaseBranches": [
+        "master",
+        "main"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "groupName": "minor dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "master",
+        "main",
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "digest"
+      ],
+      "automerge": true,
+      "groupName": "patch digest dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "master",
+        "main",
+        "/^v\\d+\\.\\d+\\.x/"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "automerge": true,
+      "groupName": "docker dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "master",
+        "main"
+      ],
+      "matchPackageNames": [
+        "github.com/longhorn/longhorn-engine",
+        "github.com/longhorn/longhorn-instance-manager",
+        "github.com/longhorn/longhorn-share-manager",
+        "github.com/longhorn/backing-image-manager",
+        "github.com/longhorn/cli"
+      ],
+      "allowedVersions": "/^v1\\.8\\.\\S+/",
+      "matchManagers": [
+        "gomod"
+      ],
+      "groupName": "longhorn branch repo dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "v1.8.x"
+      ],
+      "matchPackageNames": [
+        "github.com/longhorn/longhorn-engine",
+        "github.com/longhorn/longhorn-instance-manager",
+        "github.com/longhorn/longhorn-share-manager",
+        "github.com/longhorn/backing-image-manager",
+        "github.com/longhorn/cli"
+      ],
+      "allowedVersions": "/^v1\\.8\\.\\S+/",
+      "matchManagers": [
+        "gomod"
+      ],
+      "groupName": "longhorn branch repo dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "v1.7.x"
+      ],
+      "matchPackageNames": [
+        "github.com/longhorn/longhorn-engine",
+        "github.com/longhorn/longhorn-instance-manager",
+        "github.com/longhorn/longhorn-share-manager",
+        "github.com/longhorn/backing-image-manager",
+        "github.com/longhorn/cli"
+      ],
+      "allowedVersions": "/^v1\\.7\\.\\S+/",
+      "matchManagers": [
+        "gomod"
+      ],
+      "groupName": "longhorn branch repo dependencies"
+    },
+    {
+      "matchBaseBranches": [
+        "v1.6.x"
+      ],
+      "matchPackageNames": [
+        "github.com/longhorn/longhorn-engine",
+        "github.com/longhorn/longhorn-instance-manager",
+        "github.com/longhorn/longhorn-share-manager",
+        "github.com/longhorn/backing-image-manager"
+      ],
+      "allowedVersions": "/^v1\\.6\\.\\S+/",
+      "matchManagers": [
+        "gomod"
+      ],
+      "groupName": "longhorn branch repo dependencies"
+    }
+  ]
+}
