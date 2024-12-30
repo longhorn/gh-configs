@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "github>longhorn/gh-configs:renovate-lib"
+  ]
+}
