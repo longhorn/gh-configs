@@ -1,0 +1,45 @@
+name: "CodeQL"
+
+on:
+  workflow_call:
+    secrets:
+      CUSTOM_GITHUB_TOKEN:
+        description: |
+          Github token with write access to the repo
+        required: true
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+    - main
+    - v*
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+    - master
+    - main
+    - v*
+
+jobs:
+  codeql:
+    name: CodeQL security scanning
+    runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # required to fetch internal or private CodeQL packs
+      # packages: read
+
+      # only required for workflows in private repositories
+      # actions: read
+      # contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: go
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
